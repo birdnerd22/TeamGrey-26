@@ -19,13 +19,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
     //add mass somewhere?? no FollowerConstants
-    public static Follower create(HardwareMap h) {
-        return new Follower(
-                new ThreeWheelIMULocalizer(h, localizerConfig),
-                new Mecanum(h, drivetrainConfig),
-                new Foresight(foresightConfig)
-        );
-    }
+
     private static RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
             RevHubOrientationOnRobot.LogoFacingDirection.UP;
     private static RevHubOrientationOnRobot.UsbFacingDirection usbDirection =
@@ -102,4 +96,11 @@ public class Constants {
                 c.naturalStrafeDeceleration.set(65.93513474525282);
             }
     );
+    public static Follower create(HardwareMap h) {
+        return new Follower(
+                new ThreeWheelIMULocalizer(h, localizerConfig),
+                new Mecanum(h, drivetrainConfig),
+                new Foresight(foresightConfig)
+        );
+    }
 }

@@ -10,7 +10,6 @@ import static com.pedropathing.api.Paths.*;
 
 import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Scheduler;
-import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 import static com.pedropathing.ivy.Scheduler.schedule;

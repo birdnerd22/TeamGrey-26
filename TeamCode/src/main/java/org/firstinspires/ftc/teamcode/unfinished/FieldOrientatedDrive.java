@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.mechanisms;
+package org.firstinspires.ftc.teamcode.unfinished;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,8 +17,8 @@ public class FieldOrientatedDrive extends LinearOpMode{//can change for command 
         DcMotor rf = hardwareMap.get(DcMotor.class, "rf");
         DcMotor rb = hardwareMap.get(DcMotor.class, "rb");
 
-        lf.setDirection(DcMotorSimple.Direction.REVERSE);
-        lb.setDirection(DcMotorSimple.Direction.REVERSE);
+        rf.setDirection(DcMotorSimple.Direction.REVERSE);
+        rb.setDirection(DcMotorSimple.Direction.REVERSE);
 
         IMU imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(

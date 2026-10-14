@@ -3,12 +3,14 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeMechanism;
 
 @TeleOp
 public class IntakeOpMode extends OpMode {
 
-    IntakeMechanism intake = new IntakeMechanism();
+    IntakeCommand intake = new IntakeCommand();
+    IntakeMechanism intakeMechanism = new IntakeMechanism();
 
 
     @Override
@@ -20,13 +22,7 @@ public class IntakeOpMode extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.a){
-            intake.setPower(1.0);
-        } else if (gamepad1.b){
-            intake.setPower(-1.0);
-        } else {
-            intake.setPower(0.0);
-        }
+       intake.execute(intakeMechanism, gamepad1);
 
     }
 }

@@ -15,7 +15,7 @@ public class DriveCommand {
     }
 
     public void execute(DriveMechanism driveMechanism, Gamepad gamepad){
-        driveMechanism.drive(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x, gamepad.right_trigger);
+        driveMechanism.drive(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x);
 
     }
 

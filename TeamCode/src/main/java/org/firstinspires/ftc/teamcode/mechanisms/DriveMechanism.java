@@ -12,6 +12,8 @@ public class DriveMechanism {
     private DcMotor lf, lb, rf, rb;
     private IMU imu;
 
+
+
     public void init(HardwareMap hwMap) {
         lf = hwMap.get(DcMotor.class, "lf");
         lb = hwMap.get(DcMotor.class, "lb");
@@ -30,27 +32,37 @@ public class DriveMechanism {
 
 
     }
-    public void drive(double x, double y, double rx, double trigger){//change as well
-
-        double max = Math.max(Math.abs(x) + Math.abs(y)+ Math.abs(rx), 1);
-
-        double power = 0.2 + (0.6 * trigger);//right trigger changes power
-
-        double heading = -imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-
+    public void drive(double x, double y, double rx){//change as well
         //cubic scaling for smooth low-speed control
         x = Math.pow(x, 3);
         y = Math.pow(y, 3);
         rx = Math.pow(rx, 3);
 
-        double adjustedLx = -y * Math.sin(heading) + x * Math.cos(heading);
-        double adjustedLy = y * Math.cos(heading) + x * Math.sin(heading);
+        double theta = Math.atan2(x, y);
+        double r = Math.hypot(y, x);
 
+        theta = AngleUnit.normalizeRadians(theta - imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+        double adjustedX = r * Math.sin(theta);
+        double adjustedY = r * Math.cos(theta);
 
-        lf.setPower(((adjustedLy + adjustedLx + rx) / max) * power);
-        lb.setPower(((adjustedLy - adjustedLx + rx) / max) * power);
-        rf.setPower(((adjustedLy - adjustedLx - rx) / max) * power);
-        rb.setPower(((adjustedLy + adjustedLx - rx) / max) * power);
+        double lfPower = adjustedX + adjustedY + rx;
+        double lbPower = adjustedX - adjustedY + rx;
+        double rfPower = adjustedX - adjustedY - rx;
+        double rbPower = adjustedX + adjustedY - rx;
+
+        double maxPower = 1.0;
+        double maxSpeed = 1.0;
+
+        maxPower = Math.max(maxPower, Math.abs(lfPower));
+        maxPower = Math.max(maxPower, Math.abs(lbPower));
+        maxPower = Math.max(maxPower, Math.abs(rfPower));
+        maxPower = Math.max(maxPower, Math.abs(rbPower));
+
+        lf.setPower(maxSpeed *(lfPower / maxPower));
+        lb.setPower(maxSpeed *(lbPower / maxPower));
+        rf.setPower(maxSpeed *(rfPower / maxPower));
+        rb.setPower(maxSpeed *(rbPower / maxPower));
+
     }
 
     public void brake(){

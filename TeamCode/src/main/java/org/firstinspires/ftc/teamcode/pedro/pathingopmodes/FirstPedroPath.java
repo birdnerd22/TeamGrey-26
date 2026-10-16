@@ -1,4 +1,4 @@
-package pedro.pathingopmodes;
+package org.firstinspires.ftc.teamcode.pedro.pathingopmodes;
 
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -14,6 +14,8 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
+import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 
 @Autonomous
@@ -41,7 +43,7 @@ public class FirstPedroPath extends OpMode {
 
     @Override
     public void init() {
-        follower = pedro.Constants.create(hardwareMap);
+        follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
         Scheduler.reset();
         follower.update();

@@ -1,4 +1,4 @@
-package pedro.pathingopmodes;
+package org.firstinspires.ftc.teamcode.pedro.pathingopmodes;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
@@ -13,9 +13,11 @@ import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
-import com.pedropathing.paths.curves.Line;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.teamcode.pedro.Constants;
+
 @Autonomous
 public class MultiPathAuto extends OpMode {
     private Follower follower;
@@ -51,7 +53,7 @@ public class MultiPathAuto extends OpMode {
     }
     @Override
     public void init() {
-        follower = pedro.Constants.create(hardwareMap);
+        follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
         Scheduler.reset();
         follower.update();

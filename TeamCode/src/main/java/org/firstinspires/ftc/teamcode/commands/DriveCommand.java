@@ -22,4 +22,8 @@ public class DriveCommand {
     public void brake (DriveMechanism driveMechanism){
         driveMechanism.brake();
     }
+
+    public void driveWithValues(DriveMechanism driveMechanism, double x, double y, double rotate){
+        driveMechanism.drive(x, y, rotate);
+    }
 }

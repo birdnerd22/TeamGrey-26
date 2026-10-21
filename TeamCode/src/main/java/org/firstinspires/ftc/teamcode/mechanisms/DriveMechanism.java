@@ -32,7 +32,7 @@ public class DriveMechanism {
 
 
     }
-    public void drive(double x, double y, double rx){//change as well
+    public void drive(double x, double y, double rx){
         //cubic scaling for smooth low-speed control
         x = Math.pow(x, 3);
         y = Math.pow(y, 3);

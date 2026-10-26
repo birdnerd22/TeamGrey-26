@@ -8,14 +8,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.mechanisms.DriveMechanism;
+import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 @TeleOp
 @Disabled
 public class AprilTagAutoAlign extends OpMode {
 
     private Limelight3A limelight;
-     DriveMechanism driveMechanism = new DriveMechanism();
+     DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     // ------------------PD Controller -----------------------
     public static double kP = 0.002;
@@ -33,7 +33,7 @@ public class AprilTagAutoAlign extends OpMode {
     @Override
     public void init() {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        driveMechanism.init(hardwareMap);
+        driveSubsystem.init(hardwareMap);
         limelight.pipelineSwitch(9);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -87,7 +87,7 @@ public class AprilTagAutoAlign extends OpMode {
             lastTime = getRuntime();
         }
 
-        driveMechanism.drive(strafe, forward, rotate);
+        driveSubsystem.drive(strafe, forward, rotate);
 
         telemetry.addData("kP", kP);
         telemetry.addData("kD", kD);

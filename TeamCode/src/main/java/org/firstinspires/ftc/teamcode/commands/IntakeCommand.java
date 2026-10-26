@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.commands;
 
-import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.mechanisms.IntakeMechanism;
+import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
 
-public class IntakeCommand {
-    IntakeMechanism intake = new IntakeMechanism();
+public class IntakeCommand extends CommandBase{
+    IntakeSubsystem intake = new IntakeSubsystem();
     Gamepad gamepad = new Gamepad();
 
     public void init (HardwareMap hwMap){
@@ -16,17 +16,17 @@ public class IntakeCommand {
 
 
     }
-    public void execute(IntakeMechanism intakeMechanism, Gamepad gamepad){
+    public void execute(IntakeSubsystem intakeSubsystem, Gamepad gamepad){
         if(gamepad.a){
-            intakeMechanism.setPower(1.0);
+            intakeSubsystem.setPower(1.0);
         } else if (gamepad.b) {
-            intakeMechanism.setPower(-1.0);
+            intakeSubsystem.setPower(-1.0);
         } else {
-            intakeMechanism.setPower(0.0);
+            intakeSubsystem.setPower(0.0);
         }
     }
 
-    public void stop(IntakeMechanism intakeMechanism){
-        intakeMechanism.setPower(0.0);
+    public void stop(IntakeSubsystem intakeSubsystem){
+        intakeSubsystem.setPower(0.0);
     }
 }

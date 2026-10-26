@@ -1,11 +1,12 @@
-package org.firstinspires.ftc.teamcode.mechanisms;
+package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class IntakeMechanism {
+public class IntakeSubsystem extends SubsystemBase {
 
     private DcMotorEx intakeMotor;
 
@@ -15,10 +16,7 @@ public class IntakeMechanism {
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
-
     public void setPower(double power){
         intakeMotor.setPower(power);
     }
-
-
 }

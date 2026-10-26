@@ -4,13 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.IntakeMechanism;
+import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
 @TeleOp
 public class IntakeOpMode extends OpMode {
 
     IntakeCommand intake = new IntakeCommand();
-    IntakeMechanism intakeMechanism = new IntakeMechanism();
+    IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 
     @Override
@@ -22,7 +22,7 @@ public class IntakeOpMode extends OpMode {
 
     @Override
     public void loop() {
-       intake.execute(intakeMechanism, gamepad1);
+       intake.execute(intakeSubsystem, gamepad1);
 
     }
 }

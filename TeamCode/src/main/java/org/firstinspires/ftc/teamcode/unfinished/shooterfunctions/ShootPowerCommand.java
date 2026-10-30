@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.unfinished;
+package org.firstinspires.ftc.teamcode.unfinished.shooterfunctions;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Gamepad;

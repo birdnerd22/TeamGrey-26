@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 public class ShooterTestOpMode extends OpMode {
 
-    private ShooterSubsystem shooterSubsystem;
+    private ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
     private ShootPowerCommand shootPowerCommand;
 
     @Override
     public void init() {
-        shooterSubsystem = new ShooterSubsystem(hardwareMap);
+        shooterSubsystem.init(hardwareMap);
         shootPowerCommand = new ShootPowerCommand();
         shootPowerCommand.shootPower(shooterSubsystem, gamepad1);
     }

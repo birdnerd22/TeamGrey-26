@@ -16,11 +16,11 @@ public class ShooterPIDTuning extends OpMode {
     public static double kD = 0.0001;
     public static double kF = 0.2;
 
-    private ShooterSubsystem shooter;
+    private ShooterSubsystem shooter = new ShooterSubsystem();
 
     @Override
     public void init() {
-        shooter = new ShooterSubsystem(hardwareMap);
+        shooter.init(hardwareMap);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
     }

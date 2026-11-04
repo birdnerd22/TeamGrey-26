@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class ShooterSubsystem extends SubsystemBase {
 
     private final DcMotorEx shooter1;
-    private final DcMotorEx shooter2;
+    //private final DcMotorEx shooter2;
 
     private static final double TICKS_PER_REV = 28.0;
     private static final double GEAR_RATIO = 24.0 / 18.0;
@@ -20,36 +20,36 @@ public class ShooterSubsystem extends SubsystemBase {
     public static double kD = 0.00001;
     public static double kF = 0.2;
 
-    public ShooterSubsystem(HardwareMap hwMap){
+    public void init(HardwareMap hwMap){
         shooter1 = hwMap.get(DcMotorEx.class, "shooterMotor1");
-        shooter2 = hwMap.get(DcMotorEx.class, "shooterMotor2");
+        //shooter2 = hwMap.get(DcMotorEx.class, "shooterMotor2");
 
         shooter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        //shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         shooter1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         pdController = new PDController(kP, kD);
     }
 
     public double getCurrentRPM(){
-        double ticksPerSec = (shooter2.getVelocity());
+        double ticksPerSec = (shooter1.getVelocity());
         double motorRPM = (ticksPerSec * 60.0) / TICKS_PER_REV;
         return motorRPM * GEAR_RATIO;
     }
 
     public void stop(){
         shooter1.setPower(0);
-        shooter2.setPower(0);
+        //shooter2.setPower(0);
     }
 
     public void setPower(double power){
         shooter1.setPower(power);
-        shooter2.setPower(power);
+        //shooter2.setPower(power);
     }
 
     public void runToRPM(double targetRPM){
@@ -65,7 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
         power = Math.max(-1.0, Math.min(1.0, power));
 
         shooter1.setPower(-power);
-        shooter2.setPower(-power);
+        //shooter2.setPower(-power);
     }
 
     public double calculateRPM(double distance) {

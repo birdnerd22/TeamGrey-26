@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.Follower;
@@ -36,6 +38,10 @@ public class FieldCentricPedro extends CommandBase {
         ManualDrive.driveOrHold(follower, powers);
         follower.update();
         Pose robotPose = follower.pose();
+
+        telemetry.addData("Robot X", robotPose.x());
+        telemetry.addData("Robot Y", robotPose.y());
+        telemetry.addData("Robot Heading", Math.toDegrees(robotPose.heading()));
     }
 
     public void resetPose(){

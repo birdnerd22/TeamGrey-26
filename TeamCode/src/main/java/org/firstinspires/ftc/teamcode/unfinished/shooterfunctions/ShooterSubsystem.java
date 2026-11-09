@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    private final DcMotorEx shooter1;
+    private  DcMotorEx shooter1;
     //private final DcMotorEx shooter2;
 
     private static final double TICKS_PER_REV = 28.0;
     private static final double GEAR_RATIO = 24.0 / 18.0;
 
-    private final PDController pdController;
+    private  PDController pdController;
 
     public static double kP = 0.0002;
     public static double kD = 0.00001;

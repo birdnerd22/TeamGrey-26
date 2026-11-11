@@ -26,8 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
 
         imu = hwMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP
         ));
         imu.initialize(parameters);
 
@@ -35,16 +35,16 @@ public class DriveSubsystem extends SubsystemBase {
     }
     public void drive(double x, double y, double rx){
         //cubic scaling for smooth low-speed control
-        x = Math.pow(x, 3);
-        y = Math.pow(y, 3);
+        double adjustedX = Math.pow(x, 3);
+        double adjustedY = Math.pow(y, 3);
         rx = Math.pow(rx, 3);
 
-        double theta = Math.atan2(x, y);
+        /*double theta = Math.atan2(x, y);
         double r = Math.hypot(y, x);
 
         theta = AngleUnit.normalizeRadians(theta - imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
         double adjustedX = r * Math.sin(theta);
-        double adjustedY = r * Math.cos(theta);
+        double adjustedY = r * Math.cos(theta);*/
 
         double lfPower = adjustedX + adjustedY + rx;
         double lbPower = adjustedX - adjustedY + rx;

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    private  DcMotorEx shooter1;
+    private DcMotorEx shooter1;
     //private final DcMotorEx shooter2;
 
     private static final double TICKS_PER_REV = 28.0;
@@ -21,8 +21,8 @@ public class ShooterSubsystem extends SubsystemBase {
     public static double kF = 0.2;
 
     public void init(HardwareMap hwMap){
-        shooter1 = hwMap.get(DcMotorEx.class, "shooterMotor1");
-        //shooter2 = hwMap.get(DcMotorEx.class, "shooterMotor2");
+        shooter1 = hwMap.get(DcMotorEx.class, "shooter1");
+        //shooter2 = hwMap.get(DcMotorEx.class, "shooter2");
 
         shooter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         //shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);

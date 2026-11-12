@@ -12,7 +12,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //private final DcMotorEx shooter2;
 
     private static final double TICKS_PER_REV = 28.0;
-    private static final double GEAR_RATIO = 24.0 / 18.0;
+    private static final double GEAR_RATIO = 1;
 
     private  PDController pdController;
 
@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         pdController = new PDController(kP, kD);
@@ -64,7 +64,7 @@ public class ShooterSubsystem extends SubsystemBase {
         double power = ff + correction;
         power = Math.max(-1.0, Math.min(1.0, power));
 
-        shooter1.setPower(-power);
+        shooter1.setPower(power);
         //shooter2.setPower(-power);
     }
 

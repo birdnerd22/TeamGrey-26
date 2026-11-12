@@ -27,13 +27,11 @@ public class ShooterPIDTuning extends OpMode {
 
     @Override
     public void loop() {
-        shooter.kP = kP;
-        shooter.kD = kD;
-        shooter.kF = kF;
+        ShooterSubsystem.kP = kP;
+        ShooterSubsystem.kD = kD;
+        ShooterSubsystem.kF = kF;
 
-        if (gamepad1.a){
-            shooter.runToRPM(TARGET_RPM);
-        }
+        shooter.runToRPM(TARGET_RPM);
 
         telemetry.addData("Target RPM", TARGET_RPM);
         telemetry.addData("Current RPM", shooter.getCurrentRPM());

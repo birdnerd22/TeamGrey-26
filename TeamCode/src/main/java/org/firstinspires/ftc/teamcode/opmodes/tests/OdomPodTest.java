@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name = "Odom Encoder Test")
-public class encoderTest extends LinearOpMode {
+public class OdomPodTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {

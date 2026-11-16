@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.commands;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.arcrobotics.ftclib.command.CommandBase;
@@ -17,12 +18,11 @@ public class FieldCentricPedro extends CommandBase {
 
     private Follower follower;
 
-    public void init(HardwareMap hwMap){
+
+
+    public void start(Follower follower, HardwareMap hwMap){
+        this.follower = follower;
         follower = Constants.create(hwMap);
-
-    }
-
-    public void start(){
         follower.setPose(OpModePoseStorage.autonomousEndPose);
         follower.update();
         // Add this in Opmode public void start

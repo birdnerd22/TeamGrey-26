@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode.unfinished.shooterfunctions;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PDController;
+import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.Range;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -14,11 +16,13 @@ public class ShooterSubsystem extends SubsystemBase {
     private static final double TICKS_PER_REV = 28.0;
     private static final double GEAR_RATIO = 1;
 
-    private  PDController pdController;
+    private  PIDController pidController;
 
-    public static double kP = 0.0002;
-    public static double kD = 0.00001;
-    public static double kF = 0.2;
+    public static double kD = 0.09;
+    public static double kF = 0.9;
+    public static double kI = 0.09;
+    public static double kP = 0.9;
+
 
     public void init(HardwareMap hwMap){
         shooter1 = hwMap.get(DcMotorEx.class, "shooterMotor1");
@@ -30,10 +34,10 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        shooter1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        pdController = new PDController(kP, kD);
+        pidController = new PIDController(kP, kI, kD);
     }
 
     public double getCurrentRPM(){
@@ -55,30 +59,26 @@ public class ShooterSubsystem extends SubsystemBase {
     public void runToRPM(double targetRPM){
         double currentRPM = getCurrentRPM();
 
-        pdController.setP(kP);
-        pdController.setD(kD);
+        pidController.setP(kP);
+        pidController.setD(kD);
+        pidController.setI(kI);
 
-        double correction = pdController.calculate(targetRPM, currentRPM);
+        double correction = pidController.calculate(targetRPM, currentRPM);
 
         double ff = kF * (targetRPM / 6000.0);
         double power = ff + correction;
-        power = Math.max(-1.0, Math.min(1.0, power));
+        //power = Math.max(-1.0, Math.min(1.0, power));
+        power = Range.clip(power, -1.0, 1);
 
-        shooter1.setPower(power);
+        shooter1.setPower(-power);
         //shooter2.setPower(-power);
     }
 
-    public double calculateRPM(double distance) {
-        return 9.01121e-8 * Math.pow(distance, 6)
-                - 3.92579e-5 * Math.pow(distance, 5)
-                + 0.0069767 * Math.pow(distance, 4)
-                - 0.642693 * Math.pow(distance, 3)
-                + 32.13839 * Math.pow(distance, 2)
-                - 815.39232 * distance
-                + 10747.4643;
+   /* public double calculateRPM(double distance) {
+     interpolation, use desmos and values to make an equation or smth
     }
 
-    public void runLimelightShot(double distance){
-        runToRPM(calculateRPM(distance));
-    }
+    */
+
+
 }

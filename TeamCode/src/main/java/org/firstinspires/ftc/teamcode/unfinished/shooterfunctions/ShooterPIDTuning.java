@@ -12,9 +12,11 @@ public class ShooterPIDTuning extends OpMode {
 
     // -------- Dashboard tuning variables -------------
     public static double TARGET_RPM = 3000;
-    public static double kP = 0.002;
-    public static double kD = 0.0001;
-    public static double kF = 0.2;
+    public static double kD = 0.09;
+    public static double kF = 0.9;
+    public static double kI = 0.09;
+    public static double kP = 0.9;
+
 
     private ShooterSubsystem shooter = new ShooterSubsystem();
 
@@ -30,9 +32,12 @@ public class ShooterPIDTuning extends OpMode {
         ShooterSubsystem.kP = kP;
         ShooterSubsystem.kD = kD;
         ShooterSubsystem.kF = kF;
-        if(gamepad1.a){
+        ShooterSubsystem.kI = kI;
+
+        if(gamepad1.left_bumper){
             shooter.runToRPM(TARGET_RPM);
-        } else {
+        }
+        else if (!gamepad1.left_bumper) {
             shooter.setPower(0);
         }
 
@@ -41,6 +46,7 @@ public class ShooterPIDTuning extends OpMode {
         telemetry.addData("kP", kP);
         telemetry.addData("kD", kD);
         telemetry.addData("kF", kF);
+        telemetry.addData("kI", kI);
         telemetry.update();
 
     }

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,10 +9,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.opencv.core.Mat;
 
 public class DriveSubsystem extends SubsystemBase {
     private DcMotor lf, lb, rf, rb;
-    private IMU imu;
+    //private IMU imu;
+    private GoBildaPinpointDriver pinpoint;
 
 
 
@@ -21,32 +25,40 @@ public class DriveSubsystem extends SubsystemBase {
         rf = hwMap.get(DcMotor.class, "rf");
         rb = hwMap.get(DcMotor.class, "rb");
 
+
         rf.setDirection(DcMotorSimple.Direction.REVERSE);
         rb.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        imu = hwMap.get(IMU.class, "imu");
+        pinpoint = hwMap.get(GoBildaPinpointDriver.class, "pinpoint");
+        pinpoint.setOffsets(3.122352540023684, 2.3165247759481113, DistanceUnit.INCH);
+        pinpoint.resetPosAndIMU();
+
+
+
+        /*imu = hwMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         ));
         imu.initialize(parameters);
 
+         */
+
+
+
 
     }
     public void drive(double x, double y, double rx){
+        pinpoint.update();
+
+        double heading = pinpoint.getHeading(AngleUnit.RADIANS);
         //cubic scaling for smooth low-speed control
-        double adjustedX = Math.pow(x, 3);
-        double adjustedY = Math.pow(y, 3);
+        x = Math.pow(x, 3);
+        y = Math.pow(y, 3);
         rx = Math.pow(rx, 3);
 
-        /*double theta = Math.atan2(x, y);
-        double r = Math.hypot(y, x);
-
-        theta = AngleUnit.normalizeRadians(theta - imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-        double adjustedX = r * Math.sin(theta);
-        double adjustedY = r * Math.cos(theta);
-
-         */
+        double adjustedX = x * Math.cos(-heading) - y * Math.sin(-heading);
+        double adjustedY = x * Math.sin(-heading) + y * Math.cos(-heading);
 
         double lfPower = adjustedX + adjustedY + rx;
         double lbPower = adjustedX - adjustedY + rx;

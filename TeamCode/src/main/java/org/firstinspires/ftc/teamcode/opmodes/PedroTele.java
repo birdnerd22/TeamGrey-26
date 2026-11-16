@@ -1,21 +1,25 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.FieldCentricPedro;
-
+@TeleOp
 public class PedroTele extends OpMode {
 
     FieldCentricPedro fieldCentricPedro;
+    private Follower follower;
 
     @Override
     public void init() {
-        fieldCentricPedro.init(hardwareMap);
+
+
     }
 
     @Override
     public void start() {
-        fieldCentricPedro.start();
+        fieldCentricPedro.start(follower, hardwareMap);
 
     }
 

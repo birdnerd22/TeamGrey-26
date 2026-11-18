@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.unfinished.shooterfunctions;
+package org.firstinspires.ftc.teamcode.opmodes.shooterfunctions;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -6,23 +6,25 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.subsystems.ShooterSubsystem;
+
 @Config
 @TeleOp
 public class ShooterPIDTuning extends OpMode {
 
     // -------- Dashboard tuning variables -------------
     public static double TARGET_RPM = 3000;
-    public static double kD = 0.09;
-    public static double kF = 0.9;
-    public static double kI = 0.09;
-    public static double kP = 0.9;
+    public static double kD = 0.0;
+    public static double kF = 0.0;
+    public static double kI = 0.0;
+    public static double kP = 0.01;
 
 
-    private ShooterSubsystem shooter = new ShooterSubsystem();
+    private ShooterSubsystem shooter;
 
     @Override
     public void init() {
-        shooter.init(hardwareMap);
+        shooter = new ShooterSubsystem(hardwareMap);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
     }

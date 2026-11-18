@@ -9,21 +9,23 @@ import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 @Disabled
 @TeleOp
 public class IntakeOpMode extends OpMode {
+    IntakeSubsystem intakeSubsystem;
 
-    IntakeCommand intake = new IntakeCommand();
-    IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    IntakeCommand intakeCommand;
+
 
 
     @Override
     public void init() {
-        intake.init(hardwareMap);
+        IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap);
+        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
 
 
     }
 
     @Override
     public void loop() {
-       intake.execute(intakeSubsystem, gamepad1);
+       intakeCommand.execute(intakeSubsystem, gamepad1);
 
     }
 }

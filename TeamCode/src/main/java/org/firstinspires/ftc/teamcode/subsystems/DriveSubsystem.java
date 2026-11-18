@@ -2,15 +2,12 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.opencv.core.Mat;
 
 public class DriveSubsystem extends SubsystemBase {
     private DcMotor lf, lb, rf, rb;
@@ -19,7 +16,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
 
-    public void init(HardwareMap hwMap) {
+    public DriveSubsystem(HardwareMap hwMap) {
         lf = hwMap.get(DcMotor.class, "lf");
         lb = hwMap.get(DcMotor.class, "lb");
         rf = hwMap.get(DcMotor.class, "rf");
@@ -48,7 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
     }
-    public void drive(double x, double y, double rx){
+    public void setMotors(double x, double y, double rx){
         pinpoint.update();
 
         double heading = pinpoint.getHeading(AngleUnit.RADIANS);

@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 public class AprilTagAutoAlign extends OpMode {
 
     private Limelight3A limelight;
-     DriveSubsystem driveSubsystem = new DriveSubsystem();
+     DriveSubsystem driveSubsystem;
 
     // ------------------PD Controller -----------------------
     public static double kP = 0.002;
@@ -27,13 +27,13 @@ public class AprilTagAutoAlign extends OpMode {
     double curTime = 0;
     double lastTime = 0;
 
-    // --------------------- drive setup --------------------
+    // --------------------- setMotors setup --------------------
     double forward, strafe, rotate;
 
     @Override
     public void init() {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        driveSubsystem.init(hardwareMap);
+        driveSubsystem = new DriveSubsystem(hardwareMap);
         limelight.pipelineSwitch(9);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -50,7 +50,7 @@ public class AprilTagAutoAlign extends OpMode {
 
     @Override
     public void loop() {
-        // --------------- drive inputs -----------------
+        // --------------- setMotors inputs -----------------
 
         forward = gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
@@ -87,7 +87,7 @@ public class AprilTagAutoAlign extends OpMode {
             lastTime = getRuntime();
         }
 
-        driveSubsystem.drive(strafe, forward, rotate);
+        driveSubsystem.setMotors(strafe, forward, rotate);
 
         telemetry.addData("kP", kP);
         telemetry.addData("kD", kD);

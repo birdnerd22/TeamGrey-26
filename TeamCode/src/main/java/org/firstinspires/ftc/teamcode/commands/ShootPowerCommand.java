@@ -1,13 +1,16 @@
-package org.firstinspires.ftc.teamcode.unfinished.shooterfunctions;
+package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.subsystems.ShooterSubsystem;
+
 public class ShootPowerCommand extends CommandBase {
     ShooterSubsystem shooterSubsystem;
+
     private Gamepad gamepad;
 
-    public void shootPower(ShooterSubsystem shooterSubsystem, Gamepad gamepad){
+    public ShootPowerCommand(ShooterSubsystem shooterSubsystem, Gamepad gamepad){
         this.shooterSubsystem = shooterSubsystem;
         this.gamepad = gamepad;
         addRequirements(shooterSubsystem);
@@ -15,13 +18,14 @@ public class ShootPowerCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (gamepad.left_stick_y == 1){
+        if (gamepad.right_bumper && !gamepad.left_bumper){
             shooterSubsystem.setPower(-1);
-        } else if (gamepad.left_stick_y == -1){
+        } else if (gamepad.left_bumper && !gamepad.right_bumper){
             shooterSubsystem.setPower(1);
         } else {
             shooterSubsystem.setPower(0);
         }
+
     }
 
     public void end(){

@@ -1,7 +1,6 @@
-package org.firstinspires.ftc.teamcode.unfinished.shooterfunctions;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.controller.PDController;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -18,13 +17,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private  PIDController pidController;
 
-    public static double kD = 0.09;
+    public static double kD = 0.0;
     public static double kF = 0.9;
-    public static double kI = 0.09;
+    public static double kI = 0.0;
     public static double kP = 0.9;
 
 
-    public void init(HardwareMap hwMap){
+    public ShooterSubsystem(HardwareMap hwMap){
         shooter1 = hwMap.get(DcMotorEx.class, "shooterMotor1");
         //shooter2 = hwMap.get(DcMotorEx.class, "shooterMotor2");
 

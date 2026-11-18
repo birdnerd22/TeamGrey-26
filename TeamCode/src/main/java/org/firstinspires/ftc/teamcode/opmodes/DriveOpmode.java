@@ -9,13 +9,13 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 @TeleOp
 public class DriveOpmode extends OpMode {
 
-    DriveSubsystem driveSubsystem = new DriveSubsystem();
-    RobotCentricCommand driveCommand = new RobotCentricCommand();
+    DriveSubsystem driveSubsystem;
+    RobotCentricCommand driveCommand;
 
     @Override
     public void init() {
-        driveSubsystem.init(hardwareMap);
-        driveCommand.init(hardwareMap);
+        DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap);
+        driveCommand = new RobotCentricCommand(driveSubsystem, gamepad1);
 
     }
 

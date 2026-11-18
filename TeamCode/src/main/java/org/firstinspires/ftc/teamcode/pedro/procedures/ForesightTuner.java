@@ -34,14 +34,14 @@ public class ForesightTuner extends Procedure {
 
     @Override
     public void run() throws InterruptedException {
-        Inputs distanceInput = inputs("Distance", "The distance to drive in inches for the Max Achievable Forward and Strafe Identifiers");
+        Inputs distanceInput = inputs("Distance", "The distance to setMotors in inches for the Max Achievable Forward and Strafe Identifiers");
         Inputs.Field<Double> distance = distanceInput.d("Distance").withDefault(48.0);
         awaitInputs(distanceInput);
 
         double forwardVelocity = runOpMode(new ForwardVelocity(localizerFunction, drivetrainFunction, distance.get()));
         double strafeVelocity = runOpMode(new StrafeVelocity(localizerFunction, drivetrainFunction, distance.get()));
 
-        Inputs velocityInput = inputs("Velocity", "The velocity to drive to in inches for the Max Achievable Forward and Strafe Deceleration Identifiers");
+        Inputs velocityInput = inputs("Velocity", "The velocity to setMotors to in inches for the Max Achievable Forward and Strafe Deceleration Identifiers");
         Inputs.Field<Double> velocity = velocityInput.d("Velocity").withDefault(30.0);
         awaitInputs(velocityInput);
 
@@ -54,7 +54,7 @@ public class ForesightTuner extends Procedure {
         double headingLinear = headingBraking.get(0);
         double headingQuadratic = headingBraking.get(1);
 
-        Inputs distanceBrakingInput = inputs("Distance", "The distance to drive in inches for the Forward and Strafe Braking Identifiers. Distance must be at least 15 inches for accurate results.");
+        Inputs distanceBrakingInput = inputs("Distance", "The distance to setMotors in inches for the Forward and Strafe Braking Identifiers. Distance must be at least 15 inches for accurate results.");
         Inputs.Field<Double> distanceBraking = distanceBrakingInput.d("Distance").withDefault(36.0);
         awaitInputs(distanceBrakingInput);
         double safeDistanceBraking = Math.max(distanceBraking.get(), 15.0);
@@ -133,7 +133,7 @@ class ForwardVelocity extends TuningOpMode<Double> {
     public static double RECORD_NUMBER = 10;
 
     public ForwardVelocity(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, double distance) {
-        super("Max Forward Velocity", "A tuner for finding the maximum achievable forward velocity. This will drive forward for " + distance + " inches and then likely drift past that position.", false);
+        super("Max Forward Velocity", "A tuner for finding the maximum achievable forward velocity. This will setMotors forward for " + distance + " inches and then likely drift past that position.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
         this.distance = distance;
@@ -191,7 +191,7 @@ class StrafeVelocity extends TuningOpMode<Double> {
     public static double RECORD_NUMBER = 10;
 
     public StrafeVelocity(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, double distance) {
-        super("Max Strafe Velocity", "A tuner for finding the maximum achievable strafe velocity. This will drive left for " + distance + " inches and then likely drift past that position.", false);
+        super("Max Strafe Velocity", "A tuner for finding the maximum achievable strafe velocity. This will setMotors left for " + distance + " inches and then likely drift past that position.", false);
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
         this.distance = distance;
@@ -344,7 +344,7 @@ class StrafeDeceleration extends TuningOpMode<Double> {
     private boolean stopping;
 
     public StrafeDeceleration(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, double velocity) {
-        super("Strafe Deceleration", "A tuner for finding the deceleration of the robot when moving laterally. This will drive left until it reaches " + velocity + " inches per second.", false);
+        super("Strafe Deceleration", "A tuner for finding the deceleration of the robot when moving laterally. This will setMotors left until it reaches " + velocity + " inches per second.", false);
 
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;

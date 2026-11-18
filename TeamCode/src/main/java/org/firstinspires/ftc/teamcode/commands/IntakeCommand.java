@@ -8,14 +8,15 @@ import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
 
 public class IntakeCommand extends CommandBase{
-    IntakeSubsystem intake = new IntakeSubsystem();
-    Gamepad gamepad = new Gamepad();
+    IntakeSubsystem intakeSubsystem;
+    private Gamepad gamepad;
 
-    public void init (HardwareMap hwMap){
-        intake.init(hwMap);
-
-
+    public IntakeCommand(IntakeSubsystem intakeSubsystem, Gamepad gamepad) {
+        this.intakeSubsystem = intakeSubsystem;
+        this.gamepad = gamepad;
+        addRequirements(intakeSubsystem);
     }
+
     public void execute(IntakeSubsystem intakeSubsystem, Gamepad gamepad){
         if(gamepad.a){
             intakeSubsystem.setPower(1.0);

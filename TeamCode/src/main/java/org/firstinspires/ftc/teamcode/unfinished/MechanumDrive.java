@@ -44,7 +44,7 @@ public class MechanumDrive{
         double frontRightPower = forward - strafe - rotate;
         double backRightPower = forward + strafe - rotate;
         double maxPower = 1.0;
-        double maxSpeed = 1.0;//this can change to lower for outreach if people will drive our bot
+        double maxSpeed = 1.0;//this can change to lower for outreach if people will setMotors our bot
 
         maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
         maxPower = Math.max(maxPower, Math.abs(backLeftPower));

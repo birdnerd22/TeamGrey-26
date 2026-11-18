@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,19 +9,21 @@ import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 @TeleOp
+@Disabled
 public class IntakeDrive extends OpMode {
 
-    IntakeCommand intake = new IntakeCommand();
-    IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    DriveSubsystem driveSubsystem = new DriveSubsystem();
-    RobotCentricCommand drive = new RobotCentricCommand();
+    IntakeCommand intake;
+    IntakeSubsystem intakeSubsystem;
+
+    DriveSubsystem driveSubsystem;
+    RobotCentricCommand drive;
 
     @Override
     public void init() {
-        intake.init(hardwareMap);
-        intakeSubsystem.init(hardwareMap);
-        driveSubsystem.init(hardwareMap);
-        drive.init(hardwareMap);
+        IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap);
+        DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap);
+        drive = new RobotCentricCommand(driveSubsystem, gamepad1);
+        intake = new IntakeCommand(intakeSubsystem, gamepad1);
 
 
     }

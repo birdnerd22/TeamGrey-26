@@ -2,20 +2,21 @@ package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 public class RobotCentricCommand extends CommandBase {
+    DriveSubsystem driveSubsystem;
+    Gamepad gamepad;
 
-    DriveSubsystem drive = new DriveSubsystem();
-    public void init(HardwareMap hwMap){
-        drive.init(hwMap);
-
+    public RobotCentricCommand(DriveSubsystem driveSubsystem, Gamepad gamepad){
+        this.driveSubsystem = driveSubsystem;
+        this.gamepad = gamepad;
+        addRequirements(driveSubsystem);
     }
 
     public void execute(DriveSubsystem driveSubsystem, Gamepad gamepad){
-        driveSubsystem.drive(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x);
+        driveSubsystem.setMotors(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x);
 
     }
 
@@ -24,6 +25,6 @@ public class RobotCentricCommand extends CommandBase {
     }
 
     public void driveWithValues(DriveSubsystem driveSubsystem, double x, double y, double rotate){
-        driveSubsystem.drive(x, y, rotate);
+        driveSubsystem.setMotors(x, y, rotate);
     }
 }

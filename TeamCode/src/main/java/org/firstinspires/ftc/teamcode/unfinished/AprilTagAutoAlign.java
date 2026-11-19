@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.unfinished;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -16,6 +17,7 @@ public class AprilTagAutoAlign extends OpMode {
 
     private Limelight3A limelight;
      DriveSubsystem driveSubsystem;
+     GoBildaPinpointDriver pinpoint;
 
     // ------------------PD Controller -----------------------
     public static double kP = 0.002;

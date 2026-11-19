@@ -17,7 +17,7 @@ public class IntakeCommand extends CommandBase{
         addRequirements(intakeSubsystem);
     }
 
-    public void execute(IntakeSubsystem intakeSubsystem, Gamepad gamepad){
+    public void execute(){
         if(gamepad.a){
             intakeSubsystem.setPower(1.0);
         } else if (gamepad.b) {

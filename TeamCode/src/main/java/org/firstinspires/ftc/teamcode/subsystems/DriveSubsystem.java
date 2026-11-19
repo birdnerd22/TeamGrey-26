@@ -45,7 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
     }
-    public void setMotors(double x, double y, double rx){
+    public void setMotors(double y, double x, double rx){
         pinpoint.update();
 
         double heading = pinpoint.getHeading(AngleUnit.RADIANS);

@@ -30,11 +30,11 @@ public class IntakeDrive extends OpMode {
 
     @Override
     public void loop() {
-        intake.execute(intakeSubsystem, gamepad1);
-        drive.execute(driveSubsystem, gamepad1);
+        intake.execute();
+        drive.execute();
 
         if(gamepad1.x){
-            drive.brake(driveSubsystem);
+            drive.brake();
         }
 
 

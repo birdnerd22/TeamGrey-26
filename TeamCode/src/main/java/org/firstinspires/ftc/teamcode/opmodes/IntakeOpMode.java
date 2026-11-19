@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
-@Disabled
 @TeleOp
+@Disabled
 public class IntakeOpMode extends OpMode {
     IntakeSubsystem intakeSubsystem;
 
@@ -17,7 +17,7 @@ public class IntakeOpMode extends OpMode {
 
     @Override
     public void init() {
-        IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap);
+        intakeSubsystem = new IntakeSubsystem(hardwareMap);
         intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
 
 
@@ -25,7 +25,7 @@ public class IntakeOpMode extends OpMode {
 
     @Override
     public void loop() {
-       intakeCommand.execute(intakeSubsystem, gamepad1);
+       intakeCommand.execute();
 
     }
 }

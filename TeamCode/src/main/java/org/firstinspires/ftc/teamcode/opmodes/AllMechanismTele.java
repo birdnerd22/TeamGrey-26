@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.RobotCentricCommand;
@@ -20,29 +20,28 @@ public class AllMechanismTele extends OpMode {
     IntakeCommand intakeCommand;
    // ShooterRPMCommand shooterRPMCommand;
     ShootPowerCommand shootPowerCommand;
-    Gamepad gamepad;
+
 
     @Override
     public void init() {
-        gamepad = gamepad1;
-        DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap);
-        IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap);
-        ShooterSubsystem shooterSubsystem = new ShooterSubsystem(hardwareMap);
-        driveCommand = new RobotCentricCommand(driveSubsystem, gamepad);
-        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad);
+         driveSubsystem = new DriveSubsystem(hardwareMap);
+         intakeSubsystem = new IntakeSubsystem(hardwareMap);
+         shooterSubsystem = new ShooterSubsystem(hardwareMap);
+        driveCommand = new RobotCentricCommand(driveSubsystem, gamepad1);
+        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
         //shooterRPMCommand.ShootRPM(shooterSubsystem, gamepad1);
-        shootPowerCommand = new ShootPowerCommand(shooterSubsystem, gamepad);
+        shootPowerCommand = new ShootPowerCommand(shooterSubsystem, gamepad1);
 
     }
 
     @Override
     public void loop() {
-        driveCommand.execute(driveSubsystem, gamepad);
-        intakeCommand.execute(intakeSubsystem, gamepad);
+        //driveCommand.execute();
+        intakeCommand.execute();
         //shooterRPMCommand.execute();
 
-        if (gamepad.x){
-            driveCommand.brake(driveSubsystem);
+        if (gamepad1.x){
+            driveCommand.brake();
         }
 
 

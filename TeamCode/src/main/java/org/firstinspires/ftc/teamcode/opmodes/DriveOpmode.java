@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -7,6 +8,7 @@ import org.firstinspires.ftc.teamcode.commands.RobotCentricCommand;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
 @TeleOp
+@Disabled
 public class DriveOpmode extends OpMode {
 
     DriveSubsystem driveSubsystem;
@@ -21,7 +23,7 @@ public class DriveOpmode extends OpMode {
 
     @Override
     public void loop() {
-        driveCommand.execute(driveSubsystem, gamepad1);
+        driveCommand.execute();
 
     }
 }

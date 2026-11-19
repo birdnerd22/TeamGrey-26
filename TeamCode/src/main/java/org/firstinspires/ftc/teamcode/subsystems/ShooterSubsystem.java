@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.controller.PDController;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -15,11 +16,10 @@ public class ShooterSubsystem extends SubsystemBase {
     private static final double TICKS_PER_REV = 28.0;
     private static final double GEAR_RATIO = 1;
 
-    private  PIDController pidController;
+    private PDController pdController;
 
     public static double kD = 0.0;
     public static double kF = 0.9;
-    public static double kI = 0.0;
     public static double kP = 0.9;
 
 
@@ -36,7 +36,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        pidController = new PIDController(kP, kI, kD);
+        pdController = new PDController(kP, kD);
     }
 
     public double getCurrentRPM(){
@@ -58,11 +58,9 @@ public class ShooterSubsystem extends SubsystemBase {
     public void runToRPM(double targetRPM){
         double currentRPM = getCurrentRPM();
 
-        pidController.setP(kP);
-        pidController.setD(kD);
-        pidController.setI(kI);
-
-        double correction = pidController.calculate(targetRPM, currentRPM);
+        pdController.setP(kP);
+        pdController.setD(kD);
+        double correction = pdController.calculate(targetRPM, currentRPM);
 
         double ff = kF * (targetRPM / 6000.0);
         double power = ff + correction;

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
@@ -15,16 +16,13 @@ public class RobotCentricCommand extends CommandBase {
         addRequirements(driveSubsystem);
     }
 
-    public void execute(DriveSubsystem driveSubsystem, Gamepad gamepad){
-        driveSubsystem.setMotors(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x);
+    public void execute(){
+        driveSubsystem.setMotors(-gamepad.left_stick_y, gamepad.left_stick_x, gamepad.right_stick_x);
 
     }
 
-    public void brake (DriveSubsystem driveSubsystem){
+    public void brake (){
         driveSubsystem.brake();
     }
 
-    public void driveWithValues(DriveSubsystem driveSubsystem, double x, double y, double rotate){
-        driveSubsystem.setMotors(x, y, rotate);
-    }
 }
